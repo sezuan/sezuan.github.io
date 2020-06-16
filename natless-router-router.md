@@ -45,14 +45,14 @@ R3 raus, da entweder die spezifischere Route oder die einzige Route ist. Die IP
 Konfiguration auf der WAN Seite sollte statisch erfolgen, das sonst eine
 192.168.0.0/24 gesetzt wird und man sich so elegant aussperrt.
 
-Ohne weite Änderungen wird das ganze noch nicht funktionieren, da der Provider
-Router nicht per ARP die MAC Adressen der Clients im LAN Netz auflösen kann.
-Hier kommt nur `proxy_arp` ins Spiel. Dieses wird, wie im Skipt weiter unten
-gezeigt, für das `WAN` und `LAN` Interface aktiviert. Fragt nun der Provider
-Router nach der MAC Addresse de IP `192.168.0.170`, so antwortet der OpenWrt
-Router an seiner Stelle mit seiner eigenen MAC Adresse. Somit bekommt er das
-Pakete geschickt und kann es entsprechend weiterleiten. So können nun die
-Unicast Pakete zwischen beiden Netzteilen geroutet werden.
+Ohne weitere Änderungen wird das ganze noch nicht funktionieren, da der
+Provider Router nicht per ARP die MAC Adressen der Clients im LAN Netz auflösen
+kann.  Hier kommt nur `proxy_arp` ins Spiel. Dieses wird, wie im Skipt weiter
+unten gezeigt, für das `WAN` und `LAN` Interface aktiviert. Fragt nun der
+Provider Router nach der MAC Addresse de IP `192.168.0.170`, so antwortet der
+OpenWrt Router an seiner Stelle mit seiner eigenen MAC Adresse. Somit bekommt
+er das Pakete geschickt und kann es entsprechend weiterleiten. So können nun
+die Unicast Pakete zwischen beiden Netzteilen geroutet werden.
 
 # Anhang
 ## Script zum aktivieren von `proxy_arp` in OpenWrt
