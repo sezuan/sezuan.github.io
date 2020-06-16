@@ -57,6 +57,8 @@ die Unicast Pakete zwischen beiden Netzteilen geroutet werden.
 # Anhang
 ## Script zum aktivieren von `proxy_arp` in OpenWrt
 
+Diese Skript muss nach `/etc/hotplug.d/iface/`
+
     #!/bin/sh
   
     [ "$ACTION" = ifup -o "$ACTION" = ifupdate ] || exit 0
@@ -68,3 +70,20 @@ die Unicast Pakete zwischen beiden Netzteilen geroutet werden.
       *)
         exit 0 ;;
     esac
+
+## Statische Routen als `uci show`
+
+Die Reihenfolge ist wichtig da `ip` ohne R2 R3 nicht anlegen kann.
+
+    # R2
+    network.@route[0].interface='wan'
+    network.@route[0].netmask='255.255.255.255'
+    network.@route[0].target='192.168.0.1'
+    network.@route[0]=route
+
+    # R3
+    network.@route[1].gateway='192.168.0.1'
+    network.@route[1].interface='wan'
+    network.@route[1].netmask='0.0.0.0'
+    network.@route[1].target='0.0.0.0'
+    network.@route[1]=route
